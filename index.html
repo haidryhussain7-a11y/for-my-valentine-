@@ -52,6 +52,12 @@
         #noBtn {
             background-color: #ffffff;
             color: #ff4d6d;
+            position: absolute; /* This allows it to move around */
+            white-space: nowrap;
+            transition: all 0.2s ease; /* This makes the movement smooth */
+        }
+            background-color: #ffffff;
+            color: #ff4d6d;
             position: absolute;
             white-space: nowrap;
         }
@@ -74,7 +80,10 @@
 
     <h1 id="question">Will you be my Valentine? ❤️</h1>
     
-    <div class="container" id="mainContainer">
+<div class="container" id="mainContainer">
+    <button class="btn" id="yesBtn" onclick="celebrate()">Yes</button>
+    <button class="btn" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+</div>
         <button class="btn" id="yesBtn" onclick="celebrate()">Yes</button>
         <button class="btn" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
     </div>
@@ -86,6 +95,21 @@
 
     <script>
         function moveButton() {
+    const noBtn = document.getElementById('noBtn');
+    
+    // This ensures the button stays within the visible area of the screen
+    const padding = 20; 
+    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+    
+    // Generate a random position that is guaranteed to be on screen
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+    
+    // Apply the new position
+    noBtn.style.left = randomX + 'px';
+    noBtn.style.top = randomY + 'px';
+} 
             const noBtn = document.getElementById('noBtn');
             
             // Calculate random positions within the visible window
